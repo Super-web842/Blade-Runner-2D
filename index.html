@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Procedural Infinito - Engine 20k</title>
+    <style>
+        /* Estilo para garantir que o jogo ocupe a tela toda sem barras de rolagem */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        canvas {
+            display: block;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            image-rendering: pixelated; /* Mantém o visual de jogo nítido */
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        #loading-screen {
+            position: absolute;
+            background: #000;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-screen">
+        <h2>CARREGANDO MUNDO INFINITO...</h2>
+        <p id="status">Verificando módulos do motor...</p>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="parte1.js"></script>
+    <script src="parte2.js"></script>
+    <script src="parte3.js"></script>
+    <script src="parte4.js"></script>
+    <script src="parte5.js"></script>
+    <script src="parte6.js"></script>
+    <script src="parte7.js"></script>
+    <script src="parte8.js"></script>
+    <script src="parte9.js"></script>
+    <script src="parte10.js"></script>
+    <script src="parte11.js"></script>
+    <script src="parte12.js"></script>
+    <script src="parte13.js"></script>
+    <script src="parte14.js"></script>
+    <script src="parte15.js"></script>
+    <script src="parte16.js"></script>
+    <script src="parte17.js"></script>
+    <script src="parte18.js"></script>
+    <script src="parte19.js"></script>
+    <script src="parte20.js"></script>
+
+    <script>
+        // Script de inicialização automática
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const statusText = document.getElementById('status');
+
+            // Verifica se o objeto principal do jogo (geralmente criado na Parte 1) existe
+            if (window.Game && typeof window.Game.init === 'function') {
+                statusText.innerText = "Iniciando Engine...";
+                
+                // Pequeno atraso para garantir que tudo foi processado
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    window.Game.init();
+                }, 1000);
+            } else {
+                statusText.innerHTML = "<span style='color: red;'>ERRO: Arquivo 'parte1.js' não encontrado ou incompleto.</span>";
+                console.error("A engine não pôde ser iniciada. Certifique-se de que a Parte 1 foi carregada corretamente.");
+            }
+        });
+    </script>
+</body>
+</html>
