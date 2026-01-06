@@ -1575,4 +1575,4 @@ if (typeof module !== 'undefined' && module.exports) {
         PerlinNoise,
         GameConfig
     };
-}
+}window.Game = Game; // Ou o nome da variável principal que a IA usou
