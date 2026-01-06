@@ -1,35 +1,36 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Blade Runner 2D - Jogo</title>
+    <title>Blade Runner 2D</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; font-family: sans-serif; }
-        canvas { border: 2px solid #333; background: #111; max-width: 100%; max-height: 100%; }
-        #debug { position: absolute; top: 10px; left: 10px; color: red; font-size: 12px; }
+        body { margin: 0; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        canvas { background: #111; border: 2px solid #333; }
+        #error-msg { position: absolute; color: red; font-family: monospace; top: 20px; text-align: center; width: 100%; }
     </style>
 </head>
 <body>
-    <div id="debug"></div>
+    <div id="error-msg"></div>
     <canvas id="gameCanvas"></canvas>
 
     <script src="parte1.js"></script>
+    <script src="parte2.js"></script>
 
     <script>
         window.onload = () => {
-            const debug = document.getElementById('debug');
+            const errorDiv = document.getElementById('error-msg');
             
-            // Tenta encontrar qualquer função de início comum que a IA possa ter criado
-            const startSystem = window.Game || window.Engine || window.game;
-            
-            if (startSystem && startSystem.init) {
-                console.log("Sistema detectado, iniciando...");
-                startSystem.init();
+            // Verifica se a Parte 1 carregou algo globalmente
+            // A IA pode ter usado nomes como Game, Engine, ou apenas funções soltas
+            const engine = window.Game || window.Engine || window.game;
+
+            if (engine && engine.init) {
+                engine.init();
             } else if (typeof init === 'function') {
                 init();
             } else {
-                debug.innerText = "ERRO: O código da parte1.js carregou, mas a função 'init' não foi encontrada.";
-                console.error("Verifique se o seu parte1.js tem uma função chamada Game.init() ou similar.");
+                errorDiv.innerHTML = "ERRO CRÍTICO:<br>O arquivo 'parte1.js' foi lido, mas não encontramos a função de início.<br>Verifique se você colou o código COMPLETO da IA no parte1.js.";
             }
         };
     </script>
